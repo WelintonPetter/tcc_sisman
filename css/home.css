@@ -1,0 +1,813 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.avatar{
+    align-self: center;
+    cursor:pointer;
+    width: 50px;
+    position: absolute;
+    top:5px;
+    right:100px ;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.90));
+    
+}
+.avatar-sac{
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 35px;
+    text-align: center;
+    
+}
+  
+
+.second-sac{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #58af9b;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px;
+}
+  .title-sac{
+    color: white;
+    padding-top: 20px;
+  }  
+
+  
+.out{
+    width: 40px;
+    position: absolute;
+    top:10px;
+    align-self: center;
+    right:30px ;
+
+}
+.notify{
+    cursor:pointer;
+    width: 30px;
+    position: absolute;
+    top:20px;
+    align-self: center;
+    right: 200px;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.90));
+}
+
+
+
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    height: 100vh; /* Garante que o fundo cubra toda a altura da janela */
+    margin: 0;
+    padding: 0;
+}
+.btn-expandir {
+    
+    width: 100%;
+    padding-left: 10px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ecf0f1;
+    background: url('img/backgroud.jpg') no-repeat center center;
+    background-size: cover;
+}
+.container-top {
+    background-color: #090c0b;
+    padding: 30px;
+
+}
+.container-back{
+ 
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('img/backgroud.jpg') no-repeat;
+}
+.content {
+    background-color: #fff;
+    border-radius: 15px;
+    width: 960px;
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.content::before {
+    content: "";
+    position: absolute;
+    background-color: #58af9b;
+    width: 40%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+
+    left: 0;
+}
+
+
+/*.content-home::before {
+    content: "";
+    position: absolute;
+    background-color: #58af9b;
+    width: 15%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+
+    left: 0;
+}*/
+
+.title-primary {
+    color: #fff;
+}
+.title-second {
+    color: #58af9b;
+}
+.description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 30px;
+}
+.description-primary {
+    color: #fff;
+}
+.description-second {
+    color: #7f8c8d;
+}
+.btn {
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 10px;
+    padding: 10px 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    align-self: center;
+    border: none;
+    margin-top: 1rem;
+}
+.btn-primary {
+    background-color: transparent;
+    border: 1px solid #fff;
+    transition: background-color .5s;
+}
+.btn-primary:hover {
+    background-color: #fff;
+    color: #58af9b;
+}
+
+.btn-second, .language-selector  {
+    background-color: #58af9b;
+    border: 1px solid #58af9b;
+    transition: background-color .5s;
+}
+.btn-second-cadastro{
+    color: #090c0b;
+    box-shadow: 0 0 3px;
+}
+.btn-second:hover {
+    background-color: #fff;
+    border: 1px solid #58af9b;
+    color: #58af9b;
+}
+
+.btn-second-cadastro:hover {
+    background-color: #fff;
+    border: 1px solid #58af9b;
+    color: #58af9b;
+}
+.btn-expandir{
+    width: 100%;
+    padding-left: 10px;
+
+}
+.btn-expandir > i{
+    color: #fff;
+    font-size: 30px;
+    cursor:pointer;
+   
+}
+
+.container-home{
+    overflow: hidden;
+    width: 70px;
+    height: 100%;
+    background-color: #202020;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 #58af9b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .2s;
+}
+.container-home:hover{
+    width: 250px;
+}
+
+/* Adicione essas regras CSS ao seu arquivo style.css */
+.drop {
+    display: none;
+    position: absolute;
+    background-color: #202020;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 100px; /* Alinhamento à direita */
+    top: 60px; /* Ajuste de acordo com a altura da imagem do avatar */
+}
+
+.drop a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.drop a:hover {
+    background-color: #58af9b;
+}
+
+/* Mostrar o menu dropdown quando a classe 'show' estiver presente */
+.show {
+    display: block;
+}
+
+.first-content {
+    display: flex;
+}
+.first-content .second-column {
+    z-index: 11;
+}
+.first-column {
+    text-align: center;
+    width: 40%;
+    z-index: 10;
+}
+.second-column {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.social-media {
+    margin: 1rem 0;
+}
+.link-social-media:not(:first-child){
+    margin-left: 10px;
+}
+.link-social-media .item-social-media {
+    transition: background-color .5s;
+}
+.link-social-media:hover .item-social-media{
+    background-color: #58af9b;
+    color: #fff;
+    border-color: #58af9b;
+}
+.list-social-media {
+    display: flex;
+    list-style-type: none;
+}
+.item-social-media {
+    border: 1px solid #bdc3c7;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #95a5a6;
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+.form input {
+    height: 45px;
+    width: 100%;
+    border: none;
+    background-color: #ecf0f1;
+}
+input:-webkit-autofill 
+{    
+    -webkit-box-shadow: 0 0 0px 1000px #ecf0f1 inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+.label-input {
+    background-color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    margin: 8px;
+}
+.icon-modify {
+    color: #7f8c8d;
+    padding: 0 5px;
+}
+
+/* second content*/
+
+.second-content {
+    position: absolute;
+    display: flex;
+}
+.second-content .first-column {
+    order: 2;
+    z-index: -1;
+}
+.second-content .second-column {
+    order: 1;
+    z-index: -1;
+}
+.password {
+    color: #34495e;
+    font-size: 14px;
+    margin: 15px 0;
+    text-align: center;
+}
+.password::first-letter {
+    text-transform: capitalize;
+}
+
+
+
+.sign-in-js .first-content .first-column {
+    z-index: -1;
+}
+
+.sign-in-js .second-content .second-column {
+    z-index: 11;
+}
+.sign-in-js .second-content .first-column {
+    z-index: 13;
+}
+
+.sign-in-js .content::before {
+    left: 60%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    animation: slidein 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+
+    z-index: 12;
+}
+
+.sign-up-js .content::before {
+    animation: slideout 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+
+    z-index: 12;
+}
+
+.sign-up-js .second-content .first-column,
+.sign-up-js .second-content .second-column {
+    z-index: -1;
+}
+
+.sign-up-js .first-content .second-column {
+    z-index: 11;
+}
+
+.sign-up-js .first-content .first-column {
+    z-index: 13;    
+}
+
+
+/* DESLOCAMENTO CONTEÚDO ATRÁS DO CONTENT:BEFORE*/
+.sign-in-js .first-content .second-column {
+
+    z-index: -1;
+    position: relative;
+    animation: deslocamentoEsq 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+}
+
+.sign-up-js .second-content .second-column {
+    position: relative;
+    z-index: -1;
+    animation: deslocamentoDir 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+}
+.language-selector {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.language-selector select {
+    padding: 5px;
+    font-size: 14px;
+}
+
+
+.remember-forgot1 input[type="checkbox"] {
+    font-size: 10px;
+    width: 13px; /* Define a largura do checkbox */
+    height: 13px; /* Define a altura do checkbox */
+    border: 2px solid #58af9b; /* Define a borda do checkbox */
+    border-radius: 3px; /* Define o arredondamento das bordas */
+    background-color: transparent; /* Define a cor de fundo do checkbox */
+    appearance: none; /* Remove o estilo padrão do checkbox */
+    cursor: pointer; /* Define o cursor como ponteiro */
+    margin-right: 5px; /* Define a margem direita do checkbox */
+}
+
+.remember-forgot1 input[type="checkbox"]:checked {
+    background-color: #58af9b; /* Define a cor de fundo quando marcado */
+    border: none; /* Remove a borda quando marcado */
+    
+}
+.remember-forgot label {
+    font-size: 13px; /* Diminui o tamanho do texto do label */
+}
+ul{
+    height: 100%;
+    list-style-type: none;
+}
+ul li.item-menu:hover {
+    background: #58af9b;
+    
+}
+ul li.item-menu{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 4%;
+    display: flex;
+    margin-bottom: 20px; 
+    line-height: 40px;
+}
+ul li.item-menu{
+    transition: .5s;
+}
+ul li.item-menu a{
+    text-decoration: none;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 40px;
+}
+
+ul li.item-menu a .txt-link{
+margin-left: 40px;
+color: #fff;
+
+}
+ul li.item-menu a .icon > i{
+    font-size: 30px;
+    color: #fff;
+    
+}
+/*ANIMAÇÃOO CSS PARA O CONTEÚDO*/
+
+@keyframes deslocamentoEsq {
+
+    from {
+        left: 0;
+        opacity: 1;
+        z-index: 12;
+    }
+
+    25% {
+        left: -80px;
+        opacity: .5;
+        /* z-index: 12; NÃO HÁ NECESSIDADE */
+    }
+
+    50% {
+        left: -100px;
+        opacity: .2;
+        /* z-index: 12; NÃO HÁ NECESSIDADE */
+    }
+
+    to {
+        left: -110px;
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+
+@keyframes deslocamentoDir {
+
+    from {
+        left: 0;
+        z-index: 12;
+    }
+
+    25% {
+        left: 80px;
+        /* z-index: 12;  NÃO HÁ NECESSIDADE*/
+    }
+
+    50% {
+        left: 100px;
+        /* z-index: 12; NÃO HÁ NECESSIDADE*/
+        /* background-color: yellow;  Exemplo que dei no vídeo*/
+    }
+
+    to {
+        left: 110px;
+        z-index: -1;
+    }
+}
+
+
+/*ANIMAÇÃO CSS*/
+
+@keyframes slidein {
+
+    from {
+        left: 0;
+        width: 40%;
+    }
+
+    25% {
+        left: 5%;
+        width: 50%;
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+    }
+
+    75% {
+        left: 45%;
+        width: 50%;
+    }
+
+    to {
+        left: 60%;
+        width: 40%;
+    }
+}
+
+@keyframes slideout {
+
+    from {
+        left: 60%;
+        width: 40%;
+    }
+
+    25% {
+        left: 45%;
+        width: 50%;
+    }
+
+    50% {
+        left: 25%;
+        width: 60%;
+    }
+
+    75% {
+        left: 5%;
+        width: 50%;
+    }
+
+    to {
+        left: 0;
+        width: 40%;
+    }
+}
+
+/*VERSÃO MOBILE*/
+@media screen and (max-width: 1040px) {
+    .content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .content::before {
+        width: 100%;
+        height: 40%;
+        top: 0;
+        border-radius: 0;
+    }
+    .first-content, .second-content {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .first-column, .second-column {
+        width: 100%;
+    }
+    
+    .sign-in-js .content::before {
+        top: 60%;
+        left: 0;
+        border-radius: 0;
+
+    }
+    
+
+    .form {
+        width: 90%;
+    }
+    
+    /* ANIMAÇÃO MOBILE CSS*/
+
+    @keyframes deslocamentoEsq {
+
+        from {
+            top: 0;
+            opacity: 1;
+            z-index: 12;
+        }
+    
+        25% {
+            top: -80px;
+            opacity: .5;
+            /* z-index: 12; NÃO HÁ NECESSIDADE */
+        }
+    
+        50% {
+            top: -100px;
+            opacity: .2;
+            /* z-index: 12; NÃO HÁ NECESSIDADE */
+        }
+    
+        to {
+            top: -110px;
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+    
+    
+    @keyframes deslocamentoDir {
+    
+        from {
+            top: 0;
+            z-index: 12;
+        }
+    
+        25% {
+            top: 80px;
+            /* z-index: 12;  NÃO HÁ NECESSIDADE*/
+        }
+    
+        50% {
+            top: 100px;
+            /* z-index: 12; NÃO HÁ NECESSIDADE*/
+            /* background-color: yellow;  Exemplo que dei no vídeo*/
+        }
+    
+        to {
+            top: 110px;
+            z-index: -1;
+        }
+    }
+    
+    
+    
+    @keyframes slidein {
+    
+        from {
+            top: 0;
+            height: 40%;
+        }
+    
+        25% {
+            top: 5%;
+            height: 50%;
+        }
+    
+        50% {
+            top: 25%;
+            height: 60%;
+        }
+    
+        75% {
+            top: 45%;
+            height: 50%;
+        }
+    
+        to {
+            top: 60%;
+            height: 40%;
+        }
+    }
+    
+    @keyframes slideout {
+    
+        from {
+            top: 60%;
+            height: 40%;
+        }
+    
+        25% {
+            top: 45%;
+            height: 50%;
+        }
+    
+        50% {
+            top: 25%;
+            height: 60%;
+        }
+    
+        75% {
+            top: 5%;
+            height: 50%;
+        }
+    
+        to {
+            top: 0;
+            height: 40%;
+        }
+    }
+   
+}
+
+@media screen and (max-width: 740px) {
+    .form {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .form {
+        width: 100%;
+    }
+}
+.sidebar button {
+    background-color: #57a698;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    width: 150px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar button:hover {
+    background-color: #459a87;
+}
+
+
+/* Estilos gerais do carrossel */
+.carousel-container {
+    position: relative;
+    width: 30%;
+    left: 20%;
+    max-height: 500px; /* Limita a altura máxima do carrossel */
+    margin: 20px 0;
+    overflow: hidden; /* Garante que a imagem não exceda o container */
+    border-radius: 15px; /* Borda arredondada para o carrossel */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.8); /* Sombra para um efeito 3D */
+    
+}
+
+.carousel-inner img {
+    width: 10%;
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para texto */
+    color: #fff; /* Cor do texto */
+    bottom: 20px; /* Posiciona o texto um pouco acima do fundo */
+    left: 0;
+    right: 0;
+    text-align: center; /* Centraliza o texto */
+    padding: 10px;
+    border-radius: 5px; /* Borda arredondada */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    filter: brightness(0) invert(1); /* Para botões de controle brancos em fundo escuro */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0,0,0,0.5); /* Fundo para os ícones de controle */
+    border-radius: 50%; /* Borda arredondada para os ícones */
+    padding: 10px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .carousel-caption {
+        font-size: 12px; /* Reduz o tamanho do texto em dispositivos menores */
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        padding: 5px; /* Ajusta o padding para telas menores */
+    }
+}

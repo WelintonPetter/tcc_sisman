@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+.avatar{
+    align-self: center;
+    cursor:pointer;
+    width: 50px;
+    position: absolute;
+    top:5px;
+    right:100px ;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.90));
+    
+}
+.out{
+    width: 40px;
+    position: absolute;
+    top:10px;
+    align-self: center;
+    right:30px ;
+}
+
+.back {
+    width: 50px;
+    height: 50px; /* Adicione altura fixa */
+    position: absolute;
+    top: 10px;
+    align-self: center;
+    left: 20px;
+    object-fit: contain; /* Isso garante que a imagem mantenha a proporção */
+}
+
+.drop {
+    display: none;
+    position: absolute;
+    background-color: #202020;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 100px; /* Alinhamento à direita */
+    top: 60px; /* Ajuste de acordo com a altura da imagem do avatar */
+}
+.drop a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.drop a:hover {
+    background-color: #58af9b;
+}
+main {
+    padding: 30px;
+
+}
+
+.colunas {
+    display: flex;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+
+.coluna {
+    
+    width: 100%;
+    background-color: #f4f5f7e7 ;
+    height: 100dvh;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.column__title {
+    color: #4d5c76;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 20px;
+}
+
+.column__cards {
+    padding: 4px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.card {
+    width: 100%;
+    min-height: 70px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #dfe1e6;
+    box-shadow: 0 2px 2px #dfe1e6;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4d5c76;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+
+.formulariOrdem {
+    width: 40%;
+    min-height: 70px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#addOrderButton, #graphicButton, #userButton {
+    flex: 1;
+    background-color: #28a746c0;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+#addOrderButton:hover, #graphicButton:hover, #userButton:hover {
+    background-color: #218838;
+}
+
+.card__delete, .card__edit {
+    position: absolute;
+    top: 10px;
+    background: #ff4d4f;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.card__delete {
+    right: 10px;
+}
+
+.card__edit {
+    right: 40px;
+    background: #4CAF50;
+}
+
+.column--highlight {
+    background-color: #deebff;
+    border: 2px solid #2482ff;
+}
+
+.hidden {
+    display: none;
+}
+
+form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+form label {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+form input, form textarea, form select {
+    font-size: 0.95rem;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #f8f9fab0;
+    
+    transition: border-color 0.3s ease;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-color: #80bdff;
+}
+
+form button[type="submit"] {
+    background-color: #007bff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+form button[type="submit"]:hover {
+    background-color: #0056b3;
+    
+}
+
+
+#searchFilter {
+
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#searchFilter input[type="text"] {
+    
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+#searchFilter button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+#searchFilter button:hover {
+    background-color: #0056b3;
+}
+
+
+#filterButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#filterButtons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6c757d;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#filterButtons button:hover {
+    background-color: #0067b6;
+}
+
+button.active {
+    background-color: #007bff !important;
+}
+
+button.active:hover {
+    background-color: #0056b3 !important;
+}
+.container {
+    background-image: url('https://automatize.eng.br/wp-content/uploads/2023/05/Projeto-para-automacao-industrial.jpg');
+    background-size: cover;
+}
+
+.container-top {
+    background-color: #090c0b;
+    padding: 30px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    
+}
+
+.chart-selector {
+    
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    font-size: 1rem;
+}
+
