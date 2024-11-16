@@ -8,23 +8,20 @@ $erro = '';  // Variável para armazenar a mensagem de erro
 $mensagem = '';  // Variável para armazenar mensagens de sucesso
 
 // Configuração de credencial
-$server = 'autorack.proxy.rlwy.net';
-$usuario = 'root';
-$senha_banco = 'xEHJLKakXUHgFvHFYyspNBILZQqiuEZs';  // Senha do banco de dados
-$banco = 'railway';
-$porta = 53266;  // Porta especificada na URL de conexão
+$server = '193.203.175.140';
+$usuario = 'u215784649_root';
+$senha_banco = 'bE8Fxvb#u*%pceDUL$f';
+$banco = 'u215784649_siman';
+$porta = 3306;
 
 // Conexão com o banco de dados
 $conn = new mysqli($server, $usuario, $senha_banco, $banco, $porta);
-
-
 
 if ($conn->connect_error) {
     die("Falha ao se comunicar com o banco de dados: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifica se é um formulário de login ou cadastro
     if (isset($_POST['email-login'])) {
         // Processo de login
         $email = trim($_POST['email-login']);  // Remove espaços em branco
@@ -45,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['nome'] = $usuario['nome'];
 
-            header("Location: /site/views/home.php");
+            header("Location: views/home.php");
             exit();  // Garante que o script seja encerrado após o redirecionamento
         } else {
             $erro = "E-mail ou senha incorretos. Tente novamente.";
@@ -53,33 +50,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $smtp->close();
     } elseif (isset($_POST['email-signup'])) {
+    
         // Processo de cadastro
         $nome = trim($_POST['nome']);
+        $cod_usuario = trim($_POST['cod_usuario']);
         $email = trim($_POST['email-signup']);
         $senha_usuario = trim($_POST['senha-signup']);
-        $data_atual = date('d/m/Y');
+        $data_atual = date('Y-m-d');
         $hora_atual = date('H:i:s');
 
-        if (empty($nome) || empty($email) || empty($senha_usuario)) {
+        // Validação dos campos
+        if (empty($nome) || empty($cod_usuario) || empty($email) || empty($senha_usuario)) {
             $erro = "Todos os campos são obrigatórios.";
         } else {
-            // Prepara a consulta para inserir os dados do usuário
-            $smtp = $conn->prepare("INSERT INTO casastro (nome, email, senha, data, hora) VALUES (?, ?, ?, ?, ?)");
-            $smtp->bind_param("sssss", $nome, $email, $senha_usuario, $data_atual, $hora_atual);
+            // Verifica se o código do usuário existe e o status de 'usu_cadastrado'
+            $stmt_verifica = $conn->prepare("SELECT usu_cadastrado FROM usuario WHERE cod_usuario = ?");
+            $stmt_verifica->bind_param("s", $cod_usuario);
+            $stmt_verifica->execute();
+            $result_verifica = $stmt_verifica->get_result();
 
-            if ($smtp->execute()) {
-                $mensagem = "Cadastro realizado com sucesso!";
+            if ($result_verifica->num_rows > 0) {
+                $registro = $result_verifica->fetch_assoc();               
+                // Obtém os dados do usuário
+                $usuario = $result->fetch_assoc();
+    
+                $_SESSION['id'] = $usuario['id'];
+                $_SESSION['nome'] = $usuario['nome'];
+    
+                header("Location: views/home.php");
+                exit();  // Garante que o script seja encerrado após o redirecionamento
+                if ($registro['usu_cadastrado'] == 1) {
+                    // Cadastro já realizado para esse código
+                    $erro = "Este código de usuário já foi utilizado para um cadastro.";
+                } else {
+                    // Atualiza o campo 'usu_cadastrado' para 1
+                    $stmt_atualiza = $conn->prepare("UPDATE usuario SET usu_cadastrado = 1 WHERE cod_usuario = ?");
+                    $stmt_atualiza->bind_param("s", $cod_usuario);
+
+                    if ($stmt_atualiza->execute()) {
+                        // Insere o cadastro na tabela 'casastro'
+                        $stmt_cadastro = $conn->prepare("INSERT INTO casastro (nome, email, senha, data, hora) VALUES (?, ?, ?, ?, ?)");
+                        $stmt_cadastro->bind_param("sssss", $nome, $email, $senha_usuario, $data_atual, $hora_atual);
+
+                        if ($stmt_cadastro->execute()) {
+                            $mensagem = "Cadastro realizado com sucesso!";
+                        } else {
+                            $erro = "Erro ao realizar o cadastro: " . $stmt_cadastro->error;
+                        }
+                        $stmt_cadastro->close();
+                    } else {
+                        $erro = "Erro ao atualizar o status do cadastro: " . $stmt_atualiza->error;
+                    }
+                    $stmt_atualiza->close();
+                }
             } else {
-                $erro = "Erro ao realizar o cadastro: " . $smtp->error;
+                // Código do usuário não encontrado
+                $erro = "Código do usuário não encontrado.";
             }
 
-            $smtp->close();
+            $stmt_verifica->close();
         }
     }
 }
 
 $conn->close();
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -88,7 +127,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link rel="stylesheet" href="/site/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" 
     integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
@@ -124,6 +163,10 @@ $conn->close();
                         <i class="far fa-user icon-modify"></i>
                         <input id="name" type="text" name="nome" placeholder="Nome">
                     </label>
+                    <label class="label-input" for="cod_usuario">
+                        <i class="far fa-address-card icon-modify"></i>
+                        <input id="cod_usuario" type="text" name="cod_usuario" placeholder="Código do Usuário">
+                    </label>
                     <label class="label-input" for="email-signup">
                         <i class="far fa-envelope icon-modify"></i>
                         <input id="email-signup" type="email" name="email-signup" placeholder="Email">
@@ -139,10 +182,14 @@ $conn->close();
                         </div>
                     <?php endif; ?> 
                     <?php if (!empty($erro)): ?>
-                        <div class="error-message" style="color: red; margin-top: 10px; font-weight: bold;">
-                            <?php echo $erro; ?>
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i> <!-- Ícone de alerta -->
+                            <span><?php echo $erro; ?></span>
                         </div>
-                    <?php endif; ?>      
+                    <?php endif; ?>
+ 
+
+     
                         
                 </form>
             </div>

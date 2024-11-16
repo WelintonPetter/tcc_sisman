@@ -56,6 +56,9 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+
+
+
 ?>
 
 
@@ -140,7 +143,7 @@ $conn->close();
                 <div class="second-sac">
                     <h2 class="title title-sac">Cadastrar</h2>   
                     <img src="/site/icon/system.svg" class ="left-login-image" alt="Animação Fabrica">
-                    <form id="orderForm" class="form-container" enctype="multipart/form-data" action="/site/models/geraos.php" method="post">
+                    <form id="orderForm" class="form-container" enctype="multipart/form-data" action="/models/geraos.php" method="post">
                             <h2 class="title title-sac">Nova Ordem de Serviço</h2>
 
                             <label class="label-input" for="orderTipo">

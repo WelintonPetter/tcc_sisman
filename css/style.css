@@ -762,3 +762,22 @@ ul li.item-menu a .icon > i{
 }
 
 
+.mensagem-erro {
+    background-color: #f8d7da; /* Fundo vermelho claro */
+    color: #721c24; /* Texto vermelho escuro */
+    border: 1px solid #f5c6cb; /* Borda vermelha suave */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px 15px; /* Espaçamento interno */
+    margin-top: 15px; /* Espaçamento superior */
+    font-size: 14px; /* Tamanho do texto */
+    display: flex; /* Para alinhar o ícone ao texto */
+    align-items: center; /* Centralizar o conteúdo verticalmente */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    max-width: 300px; /* Limitar a largura */
+    justify-content: center; /* Centralizar o texto */
+}
+
+.mensagem-erro i {
+    margin-right: 10px; /* Espaçamento entre ícone e texto */
+    font-size: 18px; /* Tamanho do ícone */
+}

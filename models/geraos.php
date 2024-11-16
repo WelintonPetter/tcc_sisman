@@ -1,14 +1,7 @@
 <?php
 include('protect.php');
+include('../models/conexao.php');
 
-// Configuração de credenciais
-$server = 'localhost';
-$usuario = 'root';
-$senha_banco = '';  // Senha do banco de dados
-$banco = 'tcc_sisman';
-
-// Conexão com o banco de dados
-$conn = new mysqli($server, $usuario, $senha_banco, $banco);
 
 if ($conn->connect_error) {
     die("Falha ao se comunicar com o banco de dados: " . $conn->connect_error);
@@ -74,10 +67,6 @@ $sql = "INSERT INTO ordem_os
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("issssssssssss", $numeroOs, $orderTipo, $orderPriority, $orderDescription, $orderMaquina, $sector, $orderManutentor, $matricula_manu, $iduser, $data_atual, $hora_atual, $status, $tiposearchtipo_os);
-
-
-
-
 
 
 if ($stmt->execute()) {
