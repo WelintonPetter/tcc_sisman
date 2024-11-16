@@ -50,9 +50,7 @@ include('../models/protect.php');
                                 <hr>
                             </div>
                         <?php endforeach; ?>
-                    </div>                    
-
-                    
+                    </div>                                     
                     <img src="../icon/avatar.png" alt="Foto de Perfil" class="avatar">
                     <div class="drop">
                         <a href="#">Conta - <?php echo $_SESSION['nome']; ?></a>

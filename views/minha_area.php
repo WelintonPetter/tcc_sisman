@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Site/style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>ACOMPANHAR ANDAMENTO</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -168,7 +168,7 @@ if ($result->num_rows > 0) {
     </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
-<script src="/site/js/script.js"></script>
+<script src="../js/script.js"></script>
 <script>
 $(document).ready(function() {
     $.ajax({

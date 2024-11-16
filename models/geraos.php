@@ -75,7 +75,8 @@ $stmt->bind_param("issssssssssss", $numeroOs, $orderTipo, $orderPriority, $order
 
 
 if ($stmt->execute()) {
-    echo "Ordem criada com sucesso";
+    
+    header("Location: ../views/cadastrar_os.php");
 } else {
     echo "Erro ao criar a ordem: " . $stmt->error;
 }
