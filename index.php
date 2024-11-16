@@ -145,7 +145,7 @@ $conn->close();
                 <!-- Div para exibir a mensagem de erro -->          
             </div>    
             <div class="second-column">
-                <h2 class="title title-second">Criar Conta s2 S2</h2>
+                <h2 class="title title-second">Criar Conta </h2>
                 <div class="social-media">
                     <ul class="list-social-media">
                         <li class="item-social-media">
