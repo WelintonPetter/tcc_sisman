@@ -37,7 +37,20 @@ include('../models/protect.php');
             <div class="container-top">
                 <li class="drop-hover">
                     <img src="../icon/notify.svg" alt="notify" class="notify">
-                    
+                    <div class="drop">
+                        <?php foreach ($notificacoes as $notificacao): ?>
+                            <div id="notification-<?php echo $notificacao['id']; ?>">
+                                <a href="#">
+                                    Numero: <?php echo htmlspecialchars($notificacao['numero_os']); ?><br>
+                                    Ordem: <?php echo htmlspecialchars($notificacao['tipo_os']); ?><br>
+                                    Descrição: <?php echo htmlspecialchars($notificacao['descricao_os']); ?><br>
+                                    Data / Hora: <?php echo date('d/m/Y H:i', strtotime($notificacao['data'] . ' ' . $notificacao['hora'])); ?>
+                                </a>
+                                <button onclick="deleteNotification(<?php echo $notificacao['id']; ?>)" class="btn btn-link">Excluir</button>
+                                <hr>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>                    
 
                     
                     <img src="../icon/avatar.png" alt="Foto de Perfil" class="avatar">
