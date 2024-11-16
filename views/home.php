@@ -13,7 +13,7 @@ include('../models/protect.php');
     <title>Menu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="../css/home.css">
     <style>     
           .carousel-container {
             display: flex; /* Flexbox para organizar a imagem e o gráfico */
@@ -36,34 +36,21 @@ include('../models/protect.php');
         <div class="container-back">
             <div class="container-top">
                 <li class="drop-hover">
-                    <img src="/icon/notify.svg" alt="notify" class="notify">
+                    <img src="../icon/notify.svg" alt="notify" class="notify">
                     
-                    <div class="drop">
-                        <?php foreach ($notificacoes as $notificacao): ?>
-                            <div id="notification-<?php echo $notificacao['id']; ?>">
-                                <a href="#">
-                                    Numero: <?php echo htmlspecialchars($notificacao['numero_os']); ?><br>
-                                    Ordem: <?php echo htmlspecialchars($notificacao['tipo_os']); ?><br>
-                                    Descrição: <?php echo htmlspecialchars($notificacao['descricao_os']); ?><br>
-                                    Data / Hora: <?php echo date('d/m/Y H:i', strtotime($notificacao['data'] . ' ' . $notificacao['hora'])); ?>
-                                </a>
-                                <button onclick="deleteNotification(<?php echo $notificacao['id']; ?>)" class="btn btn-link">Excluir</button>
-                                <hr>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+
                     
-                    <img src="/icon/avatar.png" alt="Foto de Perfil" class="avatar">
+                    <img src="../icon/avatar.png" alt="Foto de Perfil" class="avatar">
                     <div class="drop">
                         <a href="#">Conta - <?php echo $_SESSION['nome']; ?></a>
-                        <a href="/views/lembrete.php">Lembrete</a>
+                        <a href="../views/lembrete.php">Lembrete</a>
                         <a href="#">Empresa</a>
                         <a href="#">Minha Equipe</a>
-                        <a href="views/sac.html">Sac</a>
+                        <a href="../views/sac.html">Sac</a>
                     </div>
                     
-                    <a href="/models/logout.php">
-                        <img src="/icon/log-out.svg" alt="Out" class="out">
+                    <a href="../models/logout.php">
+                        <img src="../icon/log-out.svg" alt="Out" class="out">
                     </a>
                 </li>                   
             </div>  
@@ -75,7 +62,7 @@ include('../models/protect.php');
                         </div>
                         <ul>
                             <li class="item-menu">
-                                <a href="/views/home.php">
+                                <a href="../views/home.php">
                                     <span class="icon"><i class="bi bi-house-fill"></i></span>
                                     <span class="txt-link">Início</span>
                                 </a>
@@ -87,7 +74,7 @@ include('../models/protect.php');
                                 </a>
                             </li>
                             <li class="item-menu">
-                                <a href="/views/cadastrar_os.php">
+                                <a href="../views/cadastrar_os.php">
                                     <span class="icon"><i class="bi bi-file-earmark-plus-fill"></i></span>
                                     <span class="txt-link">Nova Ordem</span>
                                 </a>
@@ -131,21 +118,21 @@ include('../models/protect.php');
                     <div id="carouselExampleControls1" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="/arquivos/avisos/preventiva.png" class="d-block w-100" alt="Imagem 1">
+                                <img src="../arquivos/avisos/preventiva.png" class="d-block w-100" alt="Imagem 1">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Treinamento sobre bombas.</h5>
                                     <p> Interessados, favor entrar em contato com o setor de PCM</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/arquivos/avisos/setembro.png" class="d-block w-100" alt="setembro amarelo">
+                                <img src="../arquivos/avisos/setembro.png" class="d-block w-100" alt="setembro amarelo">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Setembro Amarelo</h5>
                                     <p>Em Setembro Amarelo, vamos valorizar a vida e fortalecer a rede de apoio para quem precisa. Falar é a melhor solução.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/arquivos/avisos/uni.png" class="d-block w-100" alt="uni">
+                                <img src="../arquivos/avisos/uni.png" class="d-block w-100" alt="uni">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Unicesusmar</h5>
                                     <p>Vídeo Apresentação</p>
@@ -170,14 +157,14 @@ include('../models/protect.php');
                                 <div id="chart_div"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/site/images/image2.jpg" class="d-block w-100" alt="Imagem 2">
+                                <img src="../images/image2.jpg" class="d-block w-100" alt="Imagem 2">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Texto para Imagem 2</h5>
                                     <p>Descrição da segunda imagem.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/site/images/image3.jpg" class="d-block w-100" alt="Imagem 3">
+                                <img src="../images/image3.jpg" class="d-block w-100" alt="Imagem 3">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Texto para Imagem 3</h5>
                                     <p>Descrição da terceira imagem.</p>
@@ -213,7 +200,7 @@ include('../models/protect.php');
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/home.js"></script>
+    <script src="../js/home.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
@@ -260,7 +247,7 @@ include('../models/protect.php');
         }
         function deleteNotification(id) {
             $.ajax({
-                url: '/site/models/delete_notification.php',
+                url: '../models/delete_notification.php',
                 type: 'POST',
                 data: {id: id},
                 success: function(response) {
