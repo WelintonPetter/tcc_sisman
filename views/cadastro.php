@@ -3,7 +3,6 @@ include('../models/protect.php');
 include('../models/conexao.php');
 // Configuração de credenciais
 
-
 // Consulta SQL para obter setores
 $sql = "SELECT codsetor, nome FROM setor";
 $result = $conn->query($sql);
@@ -27,6 +26,7 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+
 ?>
 
 
@@ -38,7 +38,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/new_cadastro.css">
+    <link rel="stylesheet" href="/css/new_cadastro.css">
     <style>
         .form-container {
             display: none;
@@ -122,7 +122,7 @@ $conn->close();
        
                 <div class="second-sac">
                 <h2 class="title title-sac">Cadastros</h2>   
-                <img src="/site/icon/cadastro.svg" class ="left-login-image" alt="Animação Fabrica">
+                <img src="/icon/cadastro.svg" class ="left-login-image" alt="Animação Fabrica">
                     <form id="machineForm" class="form-container" enctype="multipart/form-data" action="../models/cadastromachine.php" method="post">  
                         <h2 class="title title-sac"> Nova Máquina</h2>
                         <label class="label-input" for="machineName">

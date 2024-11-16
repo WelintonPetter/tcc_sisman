@@ -74,7 +74,7 @@ if (!isset($_SESSION['id'])) {
             <img src="../icon/error.svg" alt="Erro">
             <h1>Você não pode acessar esta página</h1>
             <p>Porque você não está logado.</p>
-            <a href="/site/index.php">Entrar</a>
+            <a href="/index.php">Entrar</a>
         </div>
     </body>
     </html>

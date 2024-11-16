@@ -1,6 +1,7 @@
 <?php
-include('protect.php');
-include('../models/conexao.php');
+include('../models/conexao.php'); 
+include('../models/protect.php');
+
 
 
 if ($conn->connect_error) {
@@ -67,6 +68,10 @@ $sql = "INSERT INTO ordem_os
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("issssssssssss", $numeroOs, $orderTipo, $orderPriority, $orderDescription, $orderMaquina, $sector, $orderManutentor, $matricula_manu, $iduser, $data_atual, $hora_atual, $status, $tiposearchtipo_os);
+
+
+
+
 
 
 if ($stmt->execute()) {

@@ -4,14 +4,14 @@ $sectorName = $_POST['sectorName'];
 $codSector = $_POST['codSector'];
 $data_atual = date('d/m/Y');
 
-// configuração de credencial
-$server = 'localhost';
+$server = 'autorack.proxy.rlwy.net';
 $usuario = 'root';
-$senha_banco = '';  // Senha do banco de dados
-$banco = 'tcc_sisman';
+$senha_banco = 'xEHJLKakXUHgFvHFYyspNBILZQqiuEZs';  // Senha do banco de dados
+$banco = 'railway';
+$porta = 53266;  // Porta especificada na URL de conexão
 
-// conexão com o banco
-$conn = new mysqli($server, $usuario, $senha_banco, $banco);
+// Conexão com o banco de dados
+$conn = new mysqli($server, $usuario, $senha_banco, $banco, $porta);
 
 if ($conn->connect_error) {
     die("Falha ao se comunicar com o banco de dados: " . $conn->connect_error);

@@ -2,47 +2,6 @@
 include('../models/conexao.php'); 
 include('../models/protect.php');
 
-if ($conn) {
-    // Consulta para obter os dados para o gráfico
-    $query = "SELECT DATE(data) as dia, tipo_os, COUNT(*) as total 
-              FROM ordem_os 
-              WHERE DATE(data) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) 
-              GROUP BY DATE(data), tipo_os";
-    $result = mysqli_query($conn, $query);
-
-    if (!$result) {
-        die("Erro na consulta: " . mysqli_error($conn));
-    }
-
-    // Consulta para obter as últimas 5 ordens de serviço abertas
-    $query_notificacoes = "SELECT id,tipo_os, numero_os, descricao_os, data, hora 
-    FROM notificacao 
-    WHERE status = 'N' 
-    ORDER BY data DESC 
-    LIMIT 5";
-    $result_notificacoes = mysqli_query($conn, $query_notificacoes);
-
-        if (!$result_notificacoes) {
-            die("Erro na consulta de notificações: " . mysqli_error($conn));
-        }
-    } else {
-        die("Erro na conexão com o banco de dados.");
-    }
-
-$dados = [];
-$tipos_os = []; // Para armazenar todos os tipos de OS existentes
-$notificacoes = [];
-
-while ($row = mysqli_fetch_assoc($result)) {
-    $dados[] = $row;
-    if (!in_array($row['tipo_os'], $tipos_os)) {
-        $tipos_os[] = $row['tipo_os']; // Captura dinamicamente todos os tipos de OS
-    }
-}
-
-while ($row = mysqli_fetch_assoc($result_notificacoes)) {
-    $notificacoes[] = $row;
-}
 
 ?>
 
@@ -54,7 +13,7 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
     <title>Menu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/sisman.site/css/home.css">
+    <link rel="stylesheet" href="/css/home.css">
     <style>     
           .carousel-container {
             display: flex; /* Flexbox para organizar a imagem e o gráfico */
@@ -77,7 +36,7 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
         <div class="container-back">
             <div class="container-top">
                 <li class="drop-hover">
-                    <img src="/sisman.site/icon/notify.svg" alt="notify" class="notify">
+                    <img src="/icon/notify.svg" alt="notify" class="notify">
                     
                     <div class="drop">
                         <?php foreach ($notificacoes as $notificacao): ?>
@@ -94,17 +53,17 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
                         <?php endforeach; ?>
                     </div>
                     
-                    <img src="/sisman.site/icon/avatar.png" alt="Foto de Perfil" class="avatar">
+                    <img src="/icon/avatar.png" alt="Foto de Perfil" class="avatar">
                     <div class="drop">
                         <a href="#">Conta - <?php echo $_SESSION['nome']; ?></a>
-                        <a href="/sisman.site/views/lembrete.php">Lembrete</a>
+                        <a href="/views/lembrete.php">Lembrete</a>
                         <a href="#">Empresa</a>
                         <a href="#">Minha Equipe</a>
-                        <a href="/sisman.site/views/sac.html">Sac</a>
+                        <a href="views/sac.html">Sac</a>
                     </div>
                     
-                    <a href="/sisman.site/models/logout.php">
-                        <img src="/sisman.site/icon/log-out.svg" alt="Out" class="out">
+                    <a href="/models/logout.php">
+                        <img src="/icon/log-out.svg" alt="Out" class="out">
                     </a>
                 </li>                   
             </div>  
@@ -116,7 +75,7 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
                         </div>
                         <ul>
                             <li class="item-menu">
-                                <a href="home.php">
+                                <a href="/views/home.php">
                                     <span class="icon"><i class="bi bi-house-fill"></i></span>
                                     <span class="txt-link">Início</span>
                                 </a>
@@ -128,7 +87,7 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
                                 </a>
                             </li>
                             <li class="item-menu">
-                                <a href="cadastrar_os.php">
+                                <a href="/views/cadastrar_os.php">
                                     <span class="icon"><i class="bi bi-file-earmark-plus-fill"></i></span>
                                     <span class="txt-link">Nova Ordem</span>
                                 </a>
@@ -172,21 +131,21 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
                     <div id="carouselExampleControls1" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="/sisman.site/arquivos/avisos/preventiva.png" class="d-block w-100" alt="Imagem 1">
+                                <img src="/arquivos/avisos/preventiva.png" class="d-block w-100" alt="Imagem 1">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Treinamento sobre bombas.</h5>
                                     <p> Interessados, favor entrar em contato com o setor de PCM</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/sisman.site/arquivos/avisos/setembro.png" class="d-block w-100" alt="setembro amarelo">
+                                <img src="/arquivos/avisos/setembro.png" class="d-block w-100" alt="setembro amarelo">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Setembro Amarelo</h5>
                                     <p>Em Setembro Amarelo, vamos valorizar a vida e fortalecer a rede de apoio para quem precisa. Falar é a melhor solução.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/sisman.site/arquivos/avisos/uni.png" class="d-block w-100" alt="uni">
+                                <img src="/arquivos/avisos/uni.png" class="d-block w-100" alt="uni">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Unicesusmar</h5>
                                     <p>Vídeo Apresentação</p>
@@ -211,14 +170,14 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
                                 <div id="chart_div"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/sisman.site/images/image2.jpg" class="d-block w-100" alt="Imagem 2">
+                                <img src="/site/images/image2.jpg" class="d-block w-100" alt="Imagem 2">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Texto para Imagem 2</h5>
                                     <p>Descrição da segunda imagem.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/sisman.site/site/images/image3.jpg" class="d-block w-100" alt="Imagem 3">
+                                <img src="/site/images/image3.jpg" class="d-block w-100" alt="Imagem 3">
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Texto para Imagem 3</h5>
                                     <p>Descrição da terceira imagem.</p>
@@ -254,7 +213,7 @@ while ($row = mysqli_fetch_assoc($result_notificacoes)) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/sisman.site/js/home.js"></script>
+    <script src="/js/home.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});

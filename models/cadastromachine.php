@@ -50,7 +50,7 @@ if (isset($_FILES['machinePhoto']) && $_FILES['machinePhoto']['error'] == 0) {
 }
 
 // Prepara a consulta SQL para inserir os dados
-$sql = "INSERT INTO maquina (nome_maquina, tipo_maquina, fabricante, nr_serie, dt_compra, est_operacao, nl_critico, setor, observacao, path,id_usuario,data) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
+$sql = "INSERT INTO maquina (nome_maquina, tipo_maquina, fabricante, nr_serie, dt_compra, est_operacao, nl_criticidade, setor, observacao, path,id_usuario,data) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssssssssss", $machineName, $machineType, $manufacturer, $serialNumber, $acquisitionDate, $operationStatus, $criticalityLevel, $sector, $observations, $imagePath,$iduser,$data_atual);
 

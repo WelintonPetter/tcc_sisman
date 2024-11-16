@@ -6,8 +6,7 @@ $usuario = 'u215784649_root';
 $senha_banco = 'bE8Fxvb#u*%pceDUL$f';
 $banco = 'u215784649_siman';
 $porta = 3306;
-
-// conexão com o banco
+// Conexão com o banco de dados
 $conn = new mysqli($server, $usuario, $senha_banco, $banco, $porta);
 
 if ($conn->connect_error) {

@@ -56,9 +56,6 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
-
-
-
 ?>
 
 
@@ -142,7 +139,7 @@ $conn->close();
             <div class="container">  
                 <div class="second-sac">
                     <h2 class="title title-sac">Cadastrar</h2>   
-                    <img src="/site/icon/system.svg" class ="left-login-image" alt="Animação Fabrica">
+                    <img src="/icon/system.svg" class ="left-login-image" alt="Animação Fabrica">
                     <form id="orderForm" class="form-container" enctype="multipart/form-data" action="/models/geraos.php" method="post">
                             <h2 class="title title-sac">Nova Ordem de Serviço</h2>
 
@@ -204,7 +201,7 @@ $conn->close();
 
 
 
-                        <form id="orderpreventive" class="form-container" enctype="multipart/form-data" action="/site/models/geraos.php" method="post">
+                        <form id="orderpreventive" class="form-container" enctype="multipart/form-data" action="/models/geraos.php" method="post">
                             <h2 class="title title-sac">Nova Ordem Preventiva</h2>
 
                             <label class="label-input" for="orderTipo">
@@ -261,7 +258,7 @@ $conn->close();
                             <button type="submit" class="btn btn-second-cadastro" id="signupButton">Criar Ordem</button>
                         </form>
                         <div id="mensagem"></div>
-                        <form id="orderpreditiva" class="form-container" enctype="multipart/form-data" action="/site/models/geraos.php" method="post">
+                        <form id="orderpreditiva" class="form-container" enctype="multipart/form-data" action="/models/geraos.php" method="post">
                             <h2 class="title title-sac">Ordem de Serviço Preditiva</h2>
 
                             <label class="label-input" for="machine">
