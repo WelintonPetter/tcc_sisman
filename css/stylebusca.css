@@ -206,12 +206,19 @@ form button:hover {
 }
 
 .order-container {
+    width: 100%; /* Ajuste conforme necessário */
+    max-height: 400px; /* Define uma altura fixa */
+    overflow: auto; /* Adiciona a barra de rolagem quando necessário */
     border: 5px;
     background-color: #333;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
 }
+
+
+
 
 table {
     width: 100%;
@@ -443,3 +450,9 @@ ul li.item-menu a .icon > i {
         to { top: 0; height: 40%; }
     }
 }
+
+
+
+
+
+  

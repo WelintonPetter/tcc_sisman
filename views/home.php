@@ -2,7 +2,41 @@
 include('../models/conexao.php'); 
 include('../models/protect.php');
 
+// Obter o nome do manutentor da sessão
+$manutentor = $_SESSION['nome'];
 
+// Recupera os dados do usuário logado (com base no nome)
+$sql = "SELECT * FROM casastro WHERE nome = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $manutentor);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // Se o usuário estiver cadastrado, pega os dados
+    $usuario = $result->fetch_assoc();
+} else {
+    // Se não encontrado, redireciona ou exibe uma mensagem
+    echo "Usuário não encontrado.";
+    exit();
+}
+
+// Buscar lembretes da tabela "lembretes"
+$sqlLembretes = "SELECT id, titulo, mensagem, imagem FROM lembretes";
+$resultLembretes = $conn->query($sqlLembretes);
+
+$lembretes = [];
+if ($resultLembretes->num_rows > 0) {
+    while ($row = $resultLembretes->fetch_assoc()) {
+        $lembretes[] = $row;
+    }
+} else {
+    echo "Nenhum lembrete encontrado.";
+    exit();
+}
+
+// Feche a conexão com o banco de dados
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +85,13 @@ include('../models/protect.php');
                             </div>
                         <?php endforeach; ?>
                     </div>                                     
-                    <img src="../icon/avatar.png" alt="Foto de Perfil" class="avatar">
+                    <div class="avatar">
+                        <img src="<?php echo !empty($usuario['imagem']) ? $usuario['imagem'] : '../icon/avatar.png'; ?>" 
+                            alt="usuário" 
+                            style="width: 50px; height: 50px; border-radius: 50%;">
+                    </div>
                     <div class="drop">
-                        <a href="#">Conta - <?php echo $_SESSION['nome']; ?></a>
+                        <a href="../views/conta.php">Conta - <?php echo $_SESSION['nome']; ?></a>
                         <a href="../views/lembrete.php">Lembrete</a>
                         <a href="#">Empresa</a>
                         <a href="#">Minha Equipe</a>
@@ -61,7 +99,7 @@ include('../models/protect.php');
                     </div>
                     
                     <a href="../models/logout.php">
-                        <img src="../icon/log-out.svg" alt="Out" class="out">
+                        <img src="../icon/logout.png" alt="Out" class="out">
                     </a>
                 </li>                   
             </div>  
@@ -126,37 +164,35 @@ include('../models/protect.php');
                 
                 <!-- Carousel -->
                 <div class="carousel-container">
-                    <div id="carouselExampleControls1" class="carousel slide">
+                    <div id="carouselLembretes" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="../arquivos/avisos/preventiva.png" class="d-block w-100" alt="Imagem 1">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Treinamento sobre bombas.</h5>
-                                    <p> Interessados, favor entrar em contato com o setor de PCM</p>
+                            <?php if (!empty($lembretes)): ?>
+                                <?php foreach ($lembretes as $index => $lembrete): ?>
+                                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                        <img src="<?php echo htmlspecialchars($lembrete['imagem']); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($lembrete['titulo']); ?>">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5><?php echo htmlspecialchars($lembrete['titulo']); ?></h5>
+                                            <p><?php echo htmlspecialchars($lembrete['mensagem']); ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="carousel-item active">
+                                    <img src="../arquivos/avisos/default.png" class="d-block w-100" alt="Nenhum lembrete">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Nenhum lembrete disponível</h5>
+                                        <p>No momento, não há lembretes cadastrados.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../arquivos/avisos/setembro.png" class="d-block w-100" alt="setembro amarelo">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Setembro Amarelo</h5>
-                                    <p>Em Setembro Amarelo, vamos valorizar a vida e fortalecer a rede de apoio para quem precisa. Falar é a melhor solução.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../arquivos/avisos/uni.png" class="d-block w-100" alt="uni">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Unicesusmar</h5>
-                                    <p>Vídeo Apresentação</p>
-                                </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#carouselLembretes" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
+                            <span class="sr-only">Anterior</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#carouselLembretes" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
+                            <span class="sr-only">Próximo</span>
                         </a>
                     </div>
                 </div>

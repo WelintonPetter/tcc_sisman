@@ -518,3 +518,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+
+$(document).ready(function() {
+    // Função para atualizar o status da ordem via AJAX
+    $('.accept-btn').click(function() {
+        const numeroOs = $(this).data('numero');  // Obter o número da ordem
+        const status = $(this).data('status');    // Obter o novo status (aceita)
+
+        console.log('Número OS:', numeroOs);  // Verificar o número da OS
+        console.log('Status:', status);       // Verificar o status que será enviado
+
+        // Enviar a solicitação POST via AJAX
+        $.ajax({
+            url: '../models/update_status.php', // Substitua pelo caminho correto do seu script PHP
+            method: 'POST',
+            data: {
+                numero_os: numeroOs,
+                status: status
+            },
+            dataType: 'json',
+            success: function(response) {
+                console.log('Resposta do servidor:', response);  // Verificar a resposta do servidor
+                if (response.success) {
+                    // Atualizar o status na interface do usuário
+                    alert('Ordem atualizada com sucesso!');
+                    location.reload();  // Recarregar a página para atualizar a tabela
+                } else {
+                    alert('Erro ao atualizar a ordem: ' + response.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Erro na solicitação AJAX: ', textStatus, errorThrown);
+                alert('Erro ao processar a solicitação.');
+            }
+        });
+    });
+});

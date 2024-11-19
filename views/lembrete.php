@@ -1,8 +1,60 @@
 <?php
-
+// Inclua a conexão com o banco de dados
 include('../models/protect.php');
+include('../models/conexao.php');
 
+
+// Verifique se o formulário foi submetido
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recuperar dados do formulário
+    $titulo = $_POST['titulo'];
+    $mensagem = $_POST['mensagem'];
+    $data_inicial = $_POST['dataExibicao'];
+    $data_final = $_POST['dataFinalizacao'];
+    
+    // O nome do usuário será o nome logado, vindo da sessão
+    $nomeusuario = $_SESSION['nome'];
+    $idusuario = $_SESSION['id'];
+    // Processamento da imagem, se houver
+    $imagem = null;
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
+        $imagem_nome = $_FILES['imagem']['name'];
+        $imagem_tmp = $_FILES['imagem']['tmp_name'];
+        $imagem_destino = "../arquivos/avisos/" . $imagem_nome; // Diretório para armazenar a imagem
+        move_uploaded_file($imagem_tmp, $imagem_destino); // Move a imagem para o diretório
+        $imagem = $imagem_destino;
+    }
+
+
+    // Captura a data e hora atuais
+    $data_atual = date('Y-m-d'); // Data no formato YYYY-MM-DD
+    $hora_atual = date('H:i:s'); // Hora no formato HH:MM:SS
+
+    
+    // Inserir dados na tabela do banco
+    $sql = "INSERT INTO lembretes (titulo, mensagem, imagem, data_inicial, data_final, nomeusuario, idusuario, data, hora)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    if ($stmt = $conn->prepare($sql)) {
+    // Vincula os parâmetros
+    $stmt->bind_param("sssssssss", $titulo, $mensagem, $imagem, $data_inicial, $data_final, $nomeusuario, $idusuario, $data_atual, $hora_atual);
+
+    // Executa a query
+    if ($stmt->execute()) {
+    echo "Lembrete cadastrado com sucesso!";
+    } else {
+    echo "Erro ao cadastrar lembrete: " . $stmt->error;
+    }
+
+    // Fecha a conexão
+    $stmt->close();
+    } else {
+    echo "Erro na preparação da consulta: " . $conn->error;
+    }
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -188,8 +240,8 @@ include('../models/protect.php');
     </header>
     <main>
         <div class="modal">
-            <h2>CADASTRAR LEMBRES</h2>
-            <form>
+            <h2>CADASTRAR lembretes</h2>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" onsubmit="return validateDates()">
                 <div>
                     <label for="titulo">TÍTULO:</label>
                     <input type="text" id="titulo" name="titulo">
@@ -200,7 +252,9 @@ include('../models/protect.php');
                 </div>
                 <div>
                     <label for="imagem">Carregar imagem:</label>
-                    <input type="file" id="imagem" name="imagem">
+                    <input type="file" id="imagem" name="imagem" onchange="previewImage(event)">
+                    <br>
+                    <img id="preview" src="#" alt="Pré-visualização" style="display:none; width: 200px; margin-top: 10px;"/>
                 </div>
                 <div>
                     <label for="dataExibicao">Data para exibição:</label>
@@ -214,10 +268,62 @@ include('../models/protect.php');
                     <button type="submit">Salvar</button>
                 </div>
             </form>
+
+
+
         </div>
     </main>
     <footer>
         <!-- Your footer content here -->
     </footer>
 </body>
+<script>
+    function previewImage(event) {
+        const preview = document.getElementById('preview');
+        const file = event.target.files[0]; // Obtém o primeiro arquivo selecionado
+        
+        if (file) {
+            const reader = new FileReader(); // Cria um FileReader para ler o arquivo
+            reader.onload = function(e) {
+                preview.src = e.target.result; // Define a imagem da pré-visualização
+                preview.style.display = 'block'; // Exibe a imagem
+            };
+            reader.readAsDataURL(file); // Lê o arquivo como URL de dados
+        }
+    }
+    function validateDates() {
+        const dataExibicao = document.getElementById('dataExibicao').value;
+        const dataFinalizacao = document.getElementById('dataFinalizacao').value;
+
+        // Verificar se as datas foram preenchidas
+        if (dataExibicao && dataFinalizacao) {
+            // Converter as datas para objetos Date
+            const dateExibicao = new Date(dataExibicao);
+            const dateFinalizacao = new Date(dataFinalizacao);
+
+            // Comparar as datas
+            if (dateExibicao >= dateFinalizacao) {
+                alert("A data de exibição não pode ser maior ou igual à data de finalização.");
+                return false; // Impede o envio do formulário
+            }
+        }
+        return true; // Permite o envio do formulário se as datas forem válidas
+    }
+
+    function previewImage(event) {
+        const preview = document.getElementById('preview');
+        const file = event.target.files[0]; // Obtém o primeiro arquivo selecionado
+        
+        if (file) {
+            const reader = new FileReader(); // Cria um FileReader para ler o arquivo
+            reader.onload = function(e) {
+                preview.src = e.target.result; // Define a imagem da pré-visualização
+                preview.style.display = 'block'; // Exibe a imagem
+            };
+            reader.readAsDataURL(file); // Lê o arquivo como URL de dados
+        }
+    }
+</script>
+
+
 </html>

@@ -13,6 +13,35 @@ if ($result->num_rows > 0) {
     }
 }
 
+// Obter o nome do manutentor da sessão
+$manutentor = $_SESSION['nome'];
+
+// Consulta SQL para buscar as últimas 5 ordens
+$sqlOrdens = "
+    SELECT 
+        numero_os, tipo_os, citicidade_os, descricao_os, maquina_os, setor_os, status_os, data, hora
+    FROM 
+        ordem_os
+    WHERE 
+        manutentor_os = ?
+    ORDER BY 
+        data DESC, hora DESC
+    LIMIT 5
+";
+
+// Preparar a consulta
+$stmt = $conn->prepare($sqlOrdens);
+$stmt->bind_param('s', $manutentor);
+$stmt->execute();
+$resultOrdens = $stmt->get_result();
+
+$ordens = [];
+if ($resultOrdens->num_rows > 0) {
+    while ($row = $resultOrdens->fetch_assoc()) {
+        $ordens[] = $row;
+    }
+}
+
 
 
 ?>
@@ -77,8 +106,54 @@ if ($result->num_rows > 0) {
 
 
 
-                <div class="formulariOrdem">
-                    <form id="orderForm" class="hidden">
+                        <div class="formulariOrdem">
+                            
+                            <form id="orderForm" class="hidden">
+                            <div class="recent-orders">
+                            <h3>Últimas Ordens do Manutentor</h3>
+                            <?php if (count($ordens) > 0): ?>
+                                <table class="recent-orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nº OS</th>
+                                            <th>Tipo</th>
+                                            <th>Criticidade</th>
+                                            <th>Máquina</th>
+                                            <th>Setor</th>
+                                            <th>Status</th>
+                                            <th>Data</th>
+                                            <th>Responder</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <?php foreach ($ordens as $ordem): ?>
+                                            
+                                            <tr>
+                                                <td><?php echo htmlspecialchars($ordem['numero_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['tipo_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['citicidade_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['maquina_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['setor_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['status_os']); ?></td>
+                                                <td><?php echo htmlspecialchars($ordem['data']); ?></td>
+                                                
+                                                <td>
+                                                    <?php if ($ordem['status_os'] === 'Nao_Atendida'): ?>
+                                                        <button class="status-btn accept-btn" data-numero="<?php echo $ordem['numero_os']; ?>" data-status="aceita">Aceitar</button>
+                                                        <button class="status-btn deny-btn" data-numero="<?php echo $ordem['numero_os']; ?>" data-status="negada">Negar</button>
+                                                    <?php else: ?>
+
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php else: ?>
+                                <p>Não há ordens recentes para exibir.</p>
+                            <?php endif; ?>
+                        </div>
                         <label for="orderTipo">Tipo De Ordem</label>
                         <select id="orderTipo" name="orderTipo" required>
                             <option value="Corretiva">Corretiva planejada</option>
@@ -86,8 +161,7 @@ if ($result->num_rows > 0) {
                             <option value="corretiva paliativa">Corretiva paliativa</option>
                             <option value="corretiva curativa">Corretiva curativa</option>
                         </select>
-                        <label for="orderDescription">Descrição da Ordem</label>
-                        <textarea id="orderDescription" name="orderDescription" required></textarea>
+                        
                         
   
 
@@ -101,11 +175,7 @@ if ($result->num_rows > 0) {
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                        </label>
-
-
-
-                        
+                        </label>                        
                         <label for="orderPriority">Criticidade</label>
                         <select id="orderPriority" name="orderPriority" required>
                             <option value="Baixo">Baixo</option>
@@ -141,8 +211,7 @@ if ($result->num_rows > 0) {
                         <button id="filterCritical">Crítico</button>
                         <button id="clearFilter">Limpar Filtro</button>
                     </div>
-                </div>
-                </div>
+                </div>               
  
 
             <section class="colunas">
@@ -220,7 +289,10 @@ const getCircleColor = (priority) => {
     }
 };
 
-// Outras funções como `updateOrderCount`, `dragStart`, `dragEnd`, etc., permanecem as mesmas.
+
+
+
+
 
 </script>
 

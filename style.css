@@ -6,7 +6,27 @@
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
 }
+.accept-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
+.deny-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.accept-btn:hover, .deny-btn:hover {
+    opacity: 0.8;
+}
 .avatar{
     align-self: center;
     cursor:pointer;
@@ -105,8 +125,8 @@ main {
 
 
 .formulariOrdem {
-    width: 40%;
-    min-height: 70px;
+    width: 70%;
+    min-height: 180px;
 }
 
 .button-container {
@@ -338,4 +358,165 @@ button.active:hover {
     background-color: #f8f9fa;
     font-size: 1rem;
 }
+/* Estilos para a tabela de ordens */
+.recent-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f4f4f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.recent-orders-table thead {
+    background-color: #2d3748; /* Cor de fundo escura para cabeçalho */
+    color: white;
+    font-weight: bold;
+}
+
+.recent-orders-table th, .recent-orders-table td {
+    padding: 12px 16px;
+    text-align: center;
+    border: 1px solid #e2e8f0; /* Borda leve entre as células */
+}
+
+.recent-orders-table tr:nth-child(even) {
+    background-color: #f7fafc; /* Cor alternada para linhas pares */
+}
+
+.recent-orders-table tr:nth-child(odd) {
+    background-color: #ffffff; /* Cor para linhas ímpares */
+}
+
+.recent-orders-table td {
+    font-size: 14px;
+    color: #4a5568; /* Texto mais suave */
+}
+
+/* Estilo para os botões */
+.status-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin: 4px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.accept-btn {
+    background-color: #38a169; /* Verde para aceitar */
+    color: white;
+}
+
+.accept-btn:hover {
+    background-color: #2f855a; /* Verde mais escuro no hover */
+}
+
+.deny-btn {
+    background-color: #e53e3e; /* Vermelho para negar */
+    color: white;
+}
+
+.deny-btn:hover {
+    background-color: #c53030; /* Vermelho mais escuro no hover */
+}
+
+/* Estilo para a célula da data */
+.recent-orders-table td:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o cabeçalho */
+.recent-orders-table th {
+    padding: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    background-color: #2d3748;
+    color: #fff;
+}
+
+.recent-orders-table tbody tr:hover {
+    background-color: #e2e8f0; /* Cor de fundo quando passa o mouse por cima */
+}
+
+/* Estilo para a tabela quando não há ordens */
+.recent-orders-table p {
+    font-size: 16px;
+    color: #4a5568;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilo para os filtros de ordem */
+#filterButtons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#filterButtons button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #3182ce; /* Azul para botões de filtro */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#filterButtons button:hover {
+    background-color: #2b6cb0; /* Azul mais escuro no hover */
+}
+
+/* Filtro de busca */
+#searchFilter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#searchFilter input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #cbd5e0;
+    width: 300px;
+    font-size: 14px;
+}
+
+#searchFilter button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #3182ce; /* Azul para botão de busca */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#searchFilter button:hover {
+    background-color: #2b6cb0; /* Azul mais escuro no hover */
+}
+
+/* Adicionar estilos de responsividade para telas menores */
+@media (max-width: 768px) {
+    .recent-orders-table th, .recent-orders-table td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    #searchFilter input {
+        width: 100%;
+    }
+
+    #filterButtons {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
 
